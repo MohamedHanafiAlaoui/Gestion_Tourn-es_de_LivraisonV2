@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <!-- ============================
+          Warehouse
+         ============================ -->
+    <changeSet id="v1-001-create-warehouse" author="mohamed">
+        <createTable tableName="warehouse">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="adresse" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gps_lat" type="DOUBLE PRECISION"/>
+            <column name="gps_long" type="DOUBLE PRECISION"/>
+            <column name="horaire_ouverture" type="VARCHAR(20)"/>
+            <column name="horaire_fermeture" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ============================
+          Vehicule
+         ============================ -->
+    <changeSet id="v1-002-create-vehicule" author="mohamed">
+        <createTable tableName="vehicules">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(50)"/>
+            <column name="capacite_max_kg" type="DOUBLE PRECISION"/>
+            <column name="capacite_max_m3" type="DOUBLE PRECISION"/>
+            <column name="etat" type="VARCHAR(50)"/>
+            <column name="date_ajout" type="DATE"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ============================
+          Tour
+         ============================ -->
+    <changeSet id="v1-003-create-tour" author="mohamed">
+        <createTable tableName="tour">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="DATE"/>
+            <column name="vehicule_id" type="BIGINT"/>
+            <column name="warehouse_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tour"
+                                 baseColumnNames="vehicule_id"
+                                 referencedTableName="vehicules"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_tour_vehicule"/>
+        <addForeignKeyConstraint baseTableName="tour"
+                                 baseColumnNames="warehouse_id"
+                                 referencedTableName="warehouse"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_tour_warehouse"/>
+    </changeSet>
+
+    <!-- ============================
+          Delivery
+         ============================ -->
+    <changeSet id="v1-004-create-delivery" author="mohamed">
+        <createTable tableName="delivery">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="adresse" type="VARCHAR(255)"/>
+            <column name="gps_lat" type="DOUBLE PRECISION"/>
+            <column name="gps_lon" type="DOUBLE PRECISION"/>
+            <column name="poids_kg" type="DOUBLE PRECISION"/>
+            <column name="volume_m3" type="DOUBLE PRECISION"/>
+            <column name="creneau_pref" type="VARCHAR(50)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="tour_id" type="BIGINT"/>
+        </createTable>
+
+
+        <addForeignKeyConstraint baseTableName="delivery"
+                                 baseColumnNames="tour_id"
+                                 referencedTableName="tour"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_delivery_tour"/>
+    </changeSet>
+
+</databaseChangeLog>
