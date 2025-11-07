@@ -2,14 +2,17 @@ package com.example.Livraison.service;
 
 import com.example.Livraison.model.Delivery;
 import com.example.Livraison.model.Vehicule;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+@Primary
 
 public class TourOptimizerImpl implements TourOptimizer {
 
     @Override
     public List<Delivery> calculateOptimalTour(List<Delivery> deliveries, Vehicule vehicule) {
-        // Ensure unique deliveries by ID
         return deliveries.stream()
                 .filter(d -> d.getId() != null)
                 .collect(java.util.stream.Collectors.collectingAndThen(

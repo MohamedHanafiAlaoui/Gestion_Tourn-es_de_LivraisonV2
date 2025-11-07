@@ -7,11 +7,14 @@ import com.example.Livraison.model.Delivery;
 import com.example.Livraison.model.enums.EtatVehicule;
 import com.example.Livraison.model.enums.Status;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+@Service
 
 public class DeliveryService {
 

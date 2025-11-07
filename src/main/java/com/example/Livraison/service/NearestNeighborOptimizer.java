@@ -2,8 +2,10 @@ package com.example.Livraison.service;
 
 import com.example.Livraison.model.Delivery;
 import com.example.Livraison.model.Vehicule;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
+@Service
 
 public class NearestNeighborOptimizer implements TourOptimizer {
 

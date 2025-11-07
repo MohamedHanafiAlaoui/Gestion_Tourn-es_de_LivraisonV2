@@ -5,9 +5,11 @@ import com.example.Livraison.dto.VehiculeDTO;
 import com.example.Livraison.dto.WarehouseDTO;
 import com.example.Livraison.mapper.WarehouseMapper;
 import com.example.Livraison.model.Warehouse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+@Service
 
 public class WarehouseService
 {
@@ -65,10 +67,4 @@ public class WarehouseService
             }
         warehouseRepository.deleteById(id);
     }
-
-
-
-
-
-
 }
