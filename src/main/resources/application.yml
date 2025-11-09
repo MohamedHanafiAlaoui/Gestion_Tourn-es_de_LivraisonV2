@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: LivraisonApp
+  profiles:
+    active: qa
+

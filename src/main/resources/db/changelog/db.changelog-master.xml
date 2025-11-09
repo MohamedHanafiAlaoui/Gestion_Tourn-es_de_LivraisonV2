@@ -7,11 +7,11 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 
     <!--  V1 -->
-    <include file="db/changelog/db.changelog-v1.0-initial.xml" />
+    <include file="db/changelog/db.changelog-v1.0-initial.xml" relativeToChangelogFile="false"
+
+    />
 
     <!-- V2 -->
-    <include file="db/changelog/db.changelog-v2.0-new-entities.xml" />
-    <include file="db/changelog/db.changelog-v2.0-update-fields.xml"/>
-    <include file="db/changelog/db.changelog-v2.0-insert-data.xml"/>
+    <include file="db/changelog/db.changelog-v2.0-insert-data.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
