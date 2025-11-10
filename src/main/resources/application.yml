@@ -2,5 +2,5 @@ spring:
   application:
     name: LivraisonApp
   profiles:
-    active: qa
+    active: qa #div ou qa
 
