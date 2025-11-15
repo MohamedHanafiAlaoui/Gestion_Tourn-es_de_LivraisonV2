@@ -30,7 +30,7 @@ public class DeliveryHistory {
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualTime;
 
-    private long delay;
+    private Long delay;
     private String dayOfWeek;
 
     @ManyToOne
@@ -44,4 +44,23 @@ public class DeliveryHistory {
     @ManyToOne
     @JoinColumn(name = "tour_id")
     private Tour tour;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }
+

@@ -8,7 +8,14 @@ public class VehiculeMapper {
 
     public static VehiculeDTO toDto(Vehicule vehicule) {
         if (vehicule == null) throw new IllegalArgumentException("Vehicule cannot be null");
-        return VehiculeDTO.toDto(vehicule);
+        return VehiculeDTO.builder()
+                .id(vehicule.getId())
+                .type(vehicule.getType())
+                .capaciteMaxKg(vehicule.getCapaciteMaxKg())
+                .capaciteMaxM3(vehicule.getCapaciteMaxM3())
+                .etat(vehicule.getEtat())
+                .dateAjout(vehicule.getDateAjout())
+                .build();
     }
 
     public static Vehicule toEntity(VehiculeDTO dto) {
@@ -22,9 +29,4 @@ public class VehiculeMapper {
                 .dateAjout(dto.getDateAjout())
                 .build();
     }
-
-
-
-
-
 }
