@@ -26,6 +26,7 @@ public class DeliveryDTO {
     private String creneauPref;
     private Status status;
     private Long tourId;
+    private Long customerId;
 
     public  static DeliveryDTO  toDto  (Delivery delivery)
     {
@@ -40,6 +41,7 @@ public class DeliveryDTO {
                 .creneauPref(delivery.getCreneauPref())
                 .status(delivery.getStatus())
                 .tourId(delivery.getTour() != null ? delivery.getTour().getId() : null)
+                .customerId(delivery.getCustomer() != null ? delivery.getCustomer().getId() : null)
                 .build();
 
     }

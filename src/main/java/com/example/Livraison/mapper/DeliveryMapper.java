@@ -1,6 +1,7 @@
 package com.example.Livraison.mapper;
 
 import com.example.Livraison.dto.DeliveryDTO;
+import com.example.Livraison.model.Customer;
 import com.example.Livraison.model.Delivery;
 import com.example.Livraison.model.Tour;
 
@@ -28,6 +29,7 @@ public class DeliveryMapper {
                 .creneauPref(dto.getCreneauPref())
                 .status(dto.getStatus())
                 .tour(dto.getTourId() != null ? Tour.builder().id(dto.getTourId()).build() : null)
+                .customer(dto.getCustomerId() != null ? Customer.builder().id(dto.getCustomerId()).build() : null)
                 .build();
     }
 }
