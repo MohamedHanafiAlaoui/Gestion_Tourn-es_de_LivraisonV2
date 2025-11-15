@@ -91,18 +91,7 @@
     <version>2.8.5</version>
 </dependency>
 
-<dependency>
-    <groupId>org.springframework.ai</groupId>
-    <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
-    <version>1.0.0-M2</version>
-</dependency>
 
-<!-- Spring AI core (provides ChatClient) -->
-<dependency>
-    <groupId>org.springframework.ai</groupId>
-    <artifactId>spring-ai-spring-boot-starter</artifactId>
-    <version>1.0.0-M2</version>
-</dependency>
 
 <!-- Ollama provider (for TinyLlama) -->
 <dependency>

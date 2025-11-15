@@ -4,12 +4,13 @@ import com.example.Livraison.model.Delivery;
 import com.example.Livraison.model.Vehicule;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Service("aiOptimizer")  // تأكد أن الاسم مطابق للـ @Qualifier
+@Service
 @ConditionalOnProperty(prefix = "ai.ollama", name = "base-url", matchIfMissing = true)
 public class AiOptimizer implements TourOptimizer {
 
