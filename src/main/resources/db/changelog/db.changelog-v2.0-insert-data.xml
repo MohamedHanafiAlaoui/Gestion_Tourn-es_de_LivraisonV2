@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 
     <!-- ============================
           Customer 
@@ -11,20 +10,24 @@
     <changeSet id="v2-001-create-customer" author="mohamed">
         <createTable tableName="customer">
             <column name="id" type="BIGSERIAL">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+
+            <column name="first_name" type="VARCHAR(100)">
+                <constraints nullable="false" />
             </column>
-            <column name="email" type="VARCHAR(100)">
-                <constraints unique="true" nullable="false"/>
+            <column name="last_name" type="VARCHAR(100)">
+                <constraints nullable="false" />
             </column>
-            <column name="phone" type="VARCHAR(20)"/>
-            <column name="adresse" type="VARCHAR(255)"/>
+
+            <column name="latitude" type="DOUBLE PRECISION" />
+            <column name="longitude" type="DOUBLE PRECISION" />
+
+            <column name="preferred_time_slot" type="VARCHAR(50)" />
         </createTable>
 
         <rollback>
-            <dropTable tableName="customer"/>
+            <dropTable tableName="customer" />
         </rollback>
     </changeSet>
 
@@ -34,23 +37,23 @@
     <changeSet id="v2-002-create-delivery-history" author="mohamed">
         <createTable tableName="delivery_history">
             <column name="id" type="BIGSERIAL">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="delivery_id" type="BIGINT"/>
-            <column name="status" type="VARCHAR(50)"/>
+            <column name="delivery_id" type="BIGINT" />
+            <column name="status" type="VARCHAR(50)" />
             <column name="updated_at" type="TIMESTAMP">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="delivery_history"
-                                 baseColumnNames="delivery_id"
-                                 referencedTableName="delivery"
-                                 referencedColumnNames="id"
-                                 constraintName="fk_history_delivery"/>
+            baseColumnNames="delivery_id"
+            referencedTableName="delivery"
+            referencedColumnNames="id"
+            constraintName="fk_history_delivery" />
 
         <rollback>
-            <dropTable tableName="delivery_history"/>
+            <dropTable tableName="delivery_history" />
         </rollback>
     </changeSet>
 
@@ -59,18 +62,19 @@
          ============================ -->
     <changeSet id="v2-003-add-customer-to-delivery" author="mohamed">
         <addColumn tableName="delivery">
-            <column name="customer_id" type="BIGINT"/>
+            <column name="customer_id" type="BIGINT" />
         </addColumn>
 
         <addForeignKeyConstraint baseTableName="delivery"
-                                 baseColumnNames="customer_id"
-                                 referencedTableName="customer"
-                                 referencedColumnNames="id"
-                                 constraintName="fk_delivery_customer"/>
+            baseColumnNames="customer_id"
+            referencedTableName="customer"
+            referencedColumnNames="id"
+            constraintName="fk_delivery_customer" />
 
         <rollback>
-            <dropForeignKeyConstraint baseTableName="delivery" constraintName="fk_delivery_customer"/>
-            <dropColumn tableName="delivery" columnName="customer_id"/>
+            <dropForeignKeyConstraint baseTableName="delivery" constraintName="fk_delivery_customer" />
+            <dropColumn
+                tableName="delivery" columnName="customer_id" />
         </rollback>
     </changeSet>
 

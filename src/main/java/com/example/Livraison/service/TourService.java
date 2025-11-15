@@ -41,7 +41,7 @@ public class TourService {
     public TourService(TourRepository tourRepository,
                        DeliveryRepository deliveryRepository,
                        VehiculeRepository vehiculeRepository,
-                      @Qualifier("clarkeWrightOptimizer") TourOptimizer tourOptimizer,
+                      @Qualifier("aiOptimizer") TourOptimizer tourOptimizer,
                        WarehouseRepository warehouseRepository) {
         this.tourRepository = tourRepository;
         this.deliveryRepository = deliveryRepository;

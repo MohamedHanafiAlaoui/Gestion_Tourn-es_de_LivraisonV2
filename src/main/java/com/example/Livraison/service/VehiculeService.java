@@ -4,85 +4,68 @@ import com.example.Livraison.dao.Repository.VehiculeRepository;
 import com.example.Livraison.dto.VehiculeDTO;
 import com.example.Livraison.mapper.VehiculeMapper;
 import com.example.Livraison.model.Vehicule;
-import com.example.Livraison.model.enums.EtatVehicule;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-@Service
 
+@Service
 public class VehiculeService {
 
-    private final VehiculeRepository vehcrepository;
+    private final VehiculeRepository vehiculeRepository;
 
-    public VehiculeService(VehiculeRepository vehcrepository)
-    {
-        this.vehcrepository=vehcrepository;
+    public VehiculeService(VehiculeRepository vehiculeRepository) {
+        this.vehiculeRepository = vehiculeRepository;
     }
 
-    public List<VehiculeDTO> findAll()
-    {
-        return  vehcrepository.findAll()
+    public List<VehiculeDTO> findAll() {
+        return vehiculeRepository.findAll()
                 .stream()
-                .map(VehiculeDTO::toDto)
+                .map(VehiculeMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-
-    public VehiculeDTO findById(Long id)
-    {
-            Vehicule vehicule = vehcrepository.findById(id)
-                    .orElseThrow(()-> new IllegalStateException("Vehicule with id " + id + " not found"));
+    public VehiculeDTO findById(Long id) {
+        Vehicule vehicule = vehiculeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Vehicule with id " + id + " not found"));
         return VehiculeMapper.toDto(vehicule);
     }
 
-    public VehiculeDTO create(VehiculeDTO dto)
-    {
+    public VehiculeDTO create(VehiculeDTO dto) {
         Vehicule entity = VehiculeMapper.toEntity(dto);
-        Vehicule vehicule = vehcrepository.save(entity);
-
-        return VehiculeMapper.toDto(vehicule);
+        Vehicule saved = vehiculeRepository.save(entity);
+        return VehiculeMapper.toDto(saved);
     }
 
-    public VehiculeDTO update(Long id,VehiculeDTO dto)
-    {
-        Vehicule existing = vehcrepository.findById(id)
+    public VehiculeDTO update(Long id, VehiculeDTO dto) {
+        Vehicule existing = vehiculeRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Vehicule not found with ID: " + id));
         existing.setType(dto.getType());
         existing.setEtat(dto.getEtat());
         existing.setCapaciteMaxKg(dto.getCapaciteMaxKg());
         existing.setCapaciteMaxM3(dto.getCapaciteMaxM3());
-
-        Vehicule updated = vehcrepository.save(existing);
+        Vehicule updated = vehiculeRepository.save(existing);
         return VehiculeMapper.toDto(updated);
     }
 
-    public void delete(Long id)
-    {
-        if (!vehcrepository.existsById(id)) {
+    public void delete(Long id) {
+        if (!vehiculeRepository.existsById(id)) {
             throw new IllegalStateException("Vehicule not found with ID: " + id);
         }
-        vehcrepository.deleteById(id);
+        vehiculeRepository.deleteById(id);
     }
 
-    public  List<VehiculeDTO> findByTypeSortWeight()
-    {
-        List<Vehicule>  vehicules = vehcrepository.findVehiculeByCapaciteMaxKg();
-
-        return vehicules.stream().map(VehiculeDTO::toDto)
-            .collect(Collectors.toList());
+    public List<VehiculeDTO> findByTypeSortWeight() {
+        List<Vehicule> vehicules = vehiculeRepository.findVehiculeByCapaciteMaxKg();
+        return vehicules.stream()
+                .map(VehiculeMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-
-    public  List<VehiculeDTO> findByType()
-    {
-        List<Vehicule>  vehicules = vehcrepository.findByOrderByCapaciteMaxKg();
-
-        return vehicules.stream().map(VehiculeDTO::toDto).collect(Collectors.toList());
+    public List<VehiculeDTO> findByType() {
+        List<Vehicule> vehicules = vehiculeRepository.findByOrderByCapaciteMaxKg();
+        return vehicules.stream()
+                .map(VehiculeMapper::toDto)
+                .collect(Collectors.toList());
     }
-
-
-
-
 }
