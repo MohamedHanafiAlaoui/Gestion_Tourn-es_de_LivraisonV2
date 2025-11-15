@@ -1,6 +1,17 @@
 spring:
+
   application:
     name: LivraisonApp
+
   profiles:
     active: qa #div ou qa
+
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: deepseek-r1:1.5b
+
 
