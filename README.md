@@ -124,3 +124,13 @@ mvn test
 
 # Appliquer les migrations Liquibase
 mvn liquibase:update -Dspring-boot.run.profiles=dev
+```
+<img width="1700" height="762" alt="image" src="https://github.com/user-attachments/assets/82937900-0daf-4723-93bb-465694cd422a" />
+
+<img width="1063" height="813" alt="image" src="https://github.com/user-attachments/assets/0b156715-b88b-4e80-8515-16d6438a1bea" />
+
+<img width="1887" height="920" alt="image" src="https://github.com/user-attachments/assets/affa96ea-a20e-425e-a291-4516c676fb0c" />
+
+
+<img width="1891" height="918" alt="image" src="https://github.com/user-attachments/assets/8be65b8e-13d0-4f44-9ce5-0dea84852a79" />
+
